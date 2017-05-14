@@ -27,7 +27,7 @@
     "name": "JBreit",
     "email": "<jason.breitigan@gmail.com>"
   },
-  "license": "ISC",
+  "license": "MIT",
   "browserslist": [
     "last 2 versions",
     "ie >= 10"
