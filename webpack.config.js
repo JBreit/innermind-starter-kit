@@ -16,8 +16,8 @@ const banner = `
 `;
 
 const dir = {
-  src: path.resolve('client/src'),
-  dist: path.resolve('client/dist'),
+  src: path.resolve('src'),
+  dist: path.resolve('dist'),
 };
 
 const styleBundle = new ExtractText(`${pkg.name}.css`);
@@ -69,7 +69,7 @@ const base = {
 
 const dev = {
   devtool: 'eval-source-map',
-  plugins: [new Html({ template: path.resolve('client/src/index.html') })],
+  plugins: [new Html({ template: path.resolve('src/index.html') })],
 };
 
 const prod = {
