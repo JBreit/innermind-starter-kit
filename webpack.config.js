@@ -7,6 +7,14 @@ const ExtractText = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const pkg = require('./package.json');
 
+const banner = `
+  ${pkg.name} - ${pkg.description}
+  Author: ${pkg.author.name}
+  Version: ${pkg.version}
+  Url: ${pkg.homepage}
+  License(s): ${pkg.license}
+`;
+
 const dir = {
   src: path.resolve('client/src'),
   dist: path.resolve('client/dist'),
@@ -35,7 +43,7 @@ const base = {
         test: /\.css$/,
         use: styleBundle.extract([
           'css-loader',
-          'style-loader'
+          'style-loader',
         ]),
       },
       {
@@ -55,12 +63,13 @@ const base = {
         postcss: () => [autoprefixer()],
       },
     }),
+    new webpack.BannerPlugin(banner),
   ],
 };
 
 const dev = {
   devtool: 'eval-source-map',
-  plugins: [new Html({ template: path.resolve('development.tpl.html') })],
+  plugins: [new Html({ template: path.resolve('client/src/index.html') })],
 };
 
 const prod = {

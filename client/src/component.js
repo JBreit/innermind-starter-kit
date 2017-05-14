@@ -1,9 +1,7 @@
-module.exports = function () {
-  'use strict';
+/* global document */
 
+module.exports = function component() {
   const element = document.createElement('div');
-
-  element.innerHTML = 'Test';
-
+  element.innerHTML = '<h1>Inner Mind ECMAScript 2015 Starter Kit</h1>';
   return element;
 };

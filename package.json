@@ -1,6 +1,7 @@
 {
   "title": "Inner Mind Front-End Development Starter Kit",
   "name": "innermind-starter-kit",
+  "homepage": "http://www.innermindco.com/",
   "version": "0.0.1",
   "description": "ECMAScript 2015 Front-End Development Starter Kit",
   "main": "client/src/index.js",
