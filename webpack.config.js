@@ -1,4 +1,4 @@
-const path = require('path');
+const { resolve } = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const Clean = require('clean-webpack-plugin');
@@ -16,17 +16,18 @@ const banner = `
 `;
 
 const dir = {
-  src: path.resolve('src'),
-  dist: path.resolve('dist'),
+  src: resolve('src'),
+  app: resolve('src/app'),
+  dist: resolve('dist'),
 };
 
-const styleBundle = new ExtractText(`${pkg.name}.css`);
+const styleBundle = new ExtractText(`style.css`);
 
 const base = {
-  context: dir.src,
-  entry: 'index.js',
+  context: dir.app,
+  entry: 'app.js',
   resolve: {
-    modules: [dir.src, 'node_modules'],
+    modules: [dir.app, 'node_modules'],
   },
   module: {
     rules: [
@@ -47,12 +48,19 @@ const base = {
         ]),
       },
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         use: styleBundle.extract([
           'css-loader',
           'postcss-loader',
           'sass-loader',
         ]),
+      },
+      {
+        test: /\.html$/,
+        use: {
+          loader: 'html-loader',
+          options: { minimize: false },
+        },
       },
     ],
   },
@@ -60,7 +68,7 @@ const base = {
     styleBundle,
     new webpack.LoaderOptionsPlugin({
       options: {
-        postcss: () => [autoprefixer()],
+        postcss: () => [autoprefixer(pkg.browserslist)],
       },
     }),
     new webpack.BannerPlugin(banner),
@@ -69,7 +77,7 @@ const base = {
 
 const dev = {
   devtool: 'eval-source-map',
-  plugins: [new Html({ template: path.resolve('src/index.html') })],
+  plugins: [new Html({ template: resolve('index.html') })],
 };
 
 const prod = {
@@ -78,7 +86,7 @@ const prod = {
     filename: `${pkg.name}.min.js`,
   },
   plugins: [
-    new Clean(path.resolve(dir.dist, '**', '*'), { root: dir.dist }),
+    new Clean(resolve(dir.dist, '**', '*'), { root: dir.dist }),
     new webpack.optimize.UglifyJsPlugin({
       mangle: { except: ['webpackJsonp'] },
     }),
