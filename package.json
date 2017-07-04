@@ -1,9 +1,9 @@
 {
-    "title": "Inner Mind Front-End Development Starter Kit",
-    "name": "innermind-starter-kit",
+    "title": "Angular.js 1.6.4 Starter",
+    "name": "ng1.6.4-starter",
     "homepage": "http://www.innermindco.com/",
     "version": "0.0.1",
-    "description": "ECMAScript 2015 Front-End Development Starter Kit",
+    "description": "Angular.js 1.6.4 Starter",
     "main": "src/app/app.js",
     "engines": {
         "node": ">=6.10.0"
@@ -11,7 +11,7 @@
     "private": true,
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/JBreit/innermind-starter-kit.git"
+        "url": "git+https://github.com/JBreit/ng1.6.4-starter.git"
     },
     "scripts": {
         "eslint": "./node_modules/.bin/eslint ./src/app/",
